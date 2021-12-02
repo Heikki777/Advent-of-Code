@@ -80,7 +80,8 @@ class Submarine {
         }
         
         init?(rawValue: String) {
-            let splitted = rawValue.split(separator: " ")
+            let trimmed = rawValue.trimmingCharacters(in: CharacterSet([" "]))
+            let splitted = trimmed.split(separator: " ")
             
             guard splitted.count > 1 else {
                 return nil
@@ -90,7 +91,7 @@ class Submarine {
                 return nil
             }
             
-            let direction = String(splitted[0]).trimmingCharacters(in: CharacterSet([" "]))
+            let direction = String(splitted[0])
             
             if direction == "forward" {
                 self = .forward(unit)
