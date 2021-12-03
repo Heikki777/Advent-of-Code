@@ -78,6 +78,7 @@ class Submarine {
         var binaries = report
         
         for index in 0..<binaryLength {
+            guard binaries.count > 1 else { break }
             var ones = 0
             for binary in binaries {
                 guard let bit = Int(String(binary[binary.index(binary.startIndex, offsetBy: index)])) else { continue }
