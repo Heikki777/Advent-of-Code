@@ -49,11 +49,8 @@ class Submarine {
             var ones: Int = 0
             for binary in report {
                 guard index < binary.count else { continue }
-            
-                let bit = binary[binary.index(binary.startIndex, offsetBy: index)]
-                if bit == "1" {
-                    ones += 1
-                }
+                guard let bit = Int(String(binary[binary.index(binary.startIndex, offsetBy: index)])) else { continue }
+                ones += bit
             }
             binaryResult += (ones >= report.count / 2) ? "1" : "0"
         }
