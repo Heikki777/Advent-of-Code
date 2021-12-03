@@ -52,7 +52,7 @@ class Submarine {
                 guard let bit = Int(String(binary[binary.index(binary.startIndex, offsetBy: index)])) else { continue }
                 ones += bit
             }
-            binaryResult += (ones >= report.count / 2) ? "1" : "0"
+            binaryResult += (ones >= report.count - ones) ? "1" : "0"
         }
         
         if let decimal = binaryResult.binaryToInt {
