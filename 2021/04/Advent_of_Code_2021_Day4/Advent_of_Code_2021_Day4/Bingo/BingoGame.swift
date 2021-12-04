@@ -77,7 +77,7 @@ class BingoGame {
                         line
                             .split(separator: " ")
                             .compactMap { Int($0) }
-                            .map { (number: $0, checked: false )}
+                            .map { (number: $0, isMarked: false )}
                     )
                 }
             }
