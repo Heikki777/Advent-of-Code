@@ -31,16 +31,16 @@ func getLanternFishCount(afterDays days: Int) -> UInt64 {
     }
 
     for _ in 1...days {
-        var updatedFishCount: [UInt64] = Array(repeating: UInt64(0), count: 9)
+        var updated: [UInt64] = Array(repeating: UInt64(0), count: 9)
         for age in 0..<lanternFishDayCount.count {
             if age > 0 && age < 9 {
-                updatedFishCount[age-1] += lanternFishDayCount[age]
+                updated[age-1] += lanternFishDayCount[age]
             } else if age == 0 {
-                updatedFishCount[6] += lanternFishDayCount[0]
-                updatedFishCount[8] += lanternFishDayCount[0]
+                updated[6] += lanternFishDayCount[0]
+                updated[8] += lanternFishDayCount[0]
             }
         }
-        lanternFishDayCount = updatedFishCount
+        lanternFishDayCount = updated
     }
 
     let sum: UInt64 = lanternFishDayCount.reduce(0, +)
