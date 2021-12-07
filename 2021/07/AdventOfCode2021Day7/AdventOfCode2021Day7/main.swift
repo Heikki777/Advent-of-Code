@@ -35,28 +35,28 @@ func findOptimalHorizontalMove(forCrabs crabs: [Int], constantFuelRate: Bool = t
     let maxAverageDifference = abs(average - max)
     let sorted = crabs.sorted { (minAverageDifference < maxAverageDifference) ? $0 < $1 : $1 < $0 }
     
-    var optimumMove: Int?
-    var optimumFuelCost: Int?
+    var optimalMove: Int?
+    var optimalFuelCost: Int?
     moveLoop: for move in 1...max {
         var fuel = 0
         crabLoop: for crab in sorted {
             let crabFuel = (constantFuelRate) ? abs(crab - move) : sumOfFirstNaturalNumbers(n: abs(crab - move))
             fuel += crabFuel
-            if let optimumFuelCost = optimumFuelCost, fuel > optimumFuelCost {
+            if let optimalFuelCost = optimalFuelCost, fuel > optimalFuelCost {
                 break crabLoop
             }
         }
-        if let optimumFuelCost_ = optimumFuelCost {
-            if fuel < optimumFuelCost_ {
-                optimumFuelCost = fuel
-                optimumMove = move
+        if let optimalFuelCost_ = optimalFuelCost {
+            if fuel < optimalFuelCost_ {
+                optimalFuelCost = fuel
+                optimalMove = move
             }
         } else {
-            optimumMove = move
-            optimumFuelCost = fuel
+            optimalMove = move
+            optimalFuelCost = fuel
         }
     }
-    return (optimumMove, optimumFuelCost)
+    return (optimalMove, optimalFuelCost)
 
 }
 
