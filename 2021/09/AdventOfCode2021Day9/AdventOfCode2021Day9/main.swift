@@ -146,7 +146,6 @@ let heightMap = readHeightMapData(fromFile: "input")
 // PART 1
 let lowPoints = findLowPoints(in: heightMap)
 let sumOfRiskLevels = lowPoints.map { $0.number + 1 }.reduce(0, +)
-print(lowPoints)
 print(sumOfRiskLevels)
 
 // PART 2
