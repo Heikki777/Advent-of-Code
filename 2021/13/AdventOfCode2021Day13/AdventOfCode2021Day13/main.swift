@@ -124,11 +124,10 @@ if let (points, foldingInstructions) = readData(fromFile: "input") {
     let pointDictionary = Dictionary(grouping: points, by: { $0.y })
     var paper = createPaper(maxY: maxY, maxX: maxX, points: pointDictionary)
     
-    for (i, foldingInstruction) in foldingInstructions.enumerated() {
+    for foldingInstruction in foldingInstructions {
         foldPaper(&paper, using: foldingInstruction)
-        if i == foldingInstructions.count - 1 {
-            printPaper(paper)
-        }
     }
+    
+    printPaper(paper)
 }
 
