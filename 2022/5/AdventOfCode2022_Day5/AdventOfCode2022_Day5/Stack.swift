@@ -33,9 +33,9 @@ struct Stack {
     }
     
     mutating func takeTop(k: Int) -> [Crate] {
-        let subStack = Array(crates.dropFirst(crates.count - k))
+        let substack = Array(crates.dropFirst(crates.count - k))
         crates.removeLast(k)
-        return subStack
+        return substack
     }
     
     func peekTop() -> Crate? {

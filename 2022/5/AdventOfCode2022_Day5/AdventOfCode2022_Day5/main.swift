@@ -24,9 +24,6 @@ func readData(fromFile file: String, withExtension fileExtension: String = "txt"
         var stacks = Array<Stack>()
         let content = try String(contentsOfFile: filePath, encoding: .utf8)
         let lines = content.components(separatedBy: .newlines)
-        
-        
-        var isReadingMoves = false
         var crateLines: ArraySlice<String> = []
         var moveLines: ArraySlice<String> = []
         var stackIds: [Int] = []
