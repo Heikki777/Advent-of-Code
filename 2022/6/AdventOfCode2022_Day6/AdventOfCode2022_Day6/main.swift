@@ -2,7 +2,7 @@
 //  main.swift
 //  AdventOfCode2022_Day6
 //
-//  Created by Hämälistö Heikki on 6.12.2022.
+//  Created by Hämälistö Heikki on 6.12.2022. 🇫🇮
 //
 
 import Foundation
@@ -29,32 +29,43 @@ func readData(fromFile file: String, withExtension fileExtension: String = "txt"
     return nil
 }
 
-func findStartOfPacketMarker(packetLength: Int) {
-    guard let data = readData(fromFile: "input") else { return }
+func findStartOfFirstPacketMarker(inFile file: String, packetLength: Int) -> Int? {
+    guard let data = readData(fromFile: file), data.count >= packetLength else {
+        return nil
+    }
+    
     var start = data.startIndex
     var end = data.index(start, offsetBy: packetLength)
-    for i in 0..<data.count-packetLength {
-        let packet = data[start..<end]
-        let set = Set(packet)
-        if set.count == packetLength {
-            print("Start of packet marker found at character: \(i+packetLength)")
-            break
+    for i in 0..<data.count - packetLength {
+        let packetCharSet = Set(data[start..<end])
+        if packetCharSet.count == packetLength {
+            return i + packetLength
         }
         start = data.index(after: start)
         end = data.index(after: end)
     }
+    
+    return nil
 }
 
 // MARK: - Part 1
 
 func part1() {
-    findStartOfPacketMarker(packetLength: 4)
+    guard let index = findStartOfFirstPacketMarker(inFile: "input", packetLength: 4) else {
+        print("Start of packet marker was not found.")
+        return
+    }
+    print("Start of packet marker found after character: \(index)")
 }
 
 // MARK: - Part 2
 
 func part2() {
-    findStartOfPacketMarker(packetLength: 14)
+    guard let index = findStartOfFirstPacketMarker(inFile: "input", packetLength: 14) else {
+        print("Start of packet marker was not found.")
+        return
+    }
+    print("Start of packet marker found after character: \(index)")
 }
 
 
