@@ -29,9 +29,6 @@ func readData(fromFile file: String, withExtension fileExtension: String = "txt"
     return nil
 }
 
-
-// MARK: - Part 1
-
 func findStartOfPacketMarker(packetLength: Int) {
     guard let data = readData(fromFile: "input") else { return }
     var start = data.startIndex
@@ -48,9 +45,13 @@ func findStartOfPacketMarker(packetLength: Int) {
     }
 }
 
+// MARK: - Part 1
+
 func part1() {
     findStartOfPacketMarker(packetLength: 4)
 }
+
+// MARK: - Part 2
 
 func part2() {
     findStartOfPacketMarker(packetLength: 14)
