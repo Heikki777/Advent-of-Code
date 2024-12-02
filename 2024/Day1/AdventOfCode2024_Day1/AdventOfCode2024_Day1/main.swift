@@ -7,7 +7,6 @@
 
 import Foundation
 
-// Function to read lines from a text file in the app bundle
 func readLines(fromFile file: String) -> [String] {
     
     let currentDirectoryURL = URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
