@@ -61,13 +61,12 @@ func part2() {
                 isEnabled = false
             } else if match.output.0 == "do()" {
                 isEnabled = true
-            } else if isEnabled {
-                if let firstString = match.output.1,
-                   let secondString = match.output.2,
-                   let first = Int(firstString),
-                   let second = Int(secondString) {
-                    partialResult += first * second
-                }
+            } else if isEnabled,
+                let firstString = match.output.1,
+                let secondString = match.output.2,
+                let firstInt = Int(firstString),
+                let secondInt = Int(secondString) {
+                    partialResult += firstInt * secondInt
             }
         }
     }
