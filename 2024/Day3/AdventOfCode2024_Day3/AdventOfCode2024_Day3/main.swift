@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import RegexBuilder
 
 func readLines(fromFile file: String) -> [String] {
     
