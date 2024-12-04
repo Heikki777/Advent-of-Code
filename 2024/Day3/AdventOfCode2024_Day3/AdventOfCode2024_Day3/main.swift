@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RegexBuilder
 
 func readLines(fromFile file: String) -> [String] {
     
@@ -37,35 +38,62 @@ func readLines(fromFile file: String) -> [String] {
 let lines = readLines(fromFile: "input")
 
 func part1() {
-    let pattern = /mul\((\d+),(\d+)\)/
+    let pattern = Regex {
+        "mul("
+        TryCapture {
+            OneOrMore(.digit)
+        } transform: {
+            Int($0)
+        }
+        ","
+        TryCapture {
+            OneOrMore(.digit)
+        } transform: {
+            Int($0)
+        }
+        ")"
+    }
     let result = lines.reduce(into: 0) { lineResult, line in
         let matches = line.matches(of: pattern)
         lineResult += matches.reduce(into: 0) { partialResult, match in
-            if let first = Int(match.output.1), let second = Int(match.output.2) {
-                partialResult += first * second
-            }
+            partialResult += match.output.1 * match.output.2
         }
     }
     print("Part 1:", result)
 }
 
 func part2() {
-    let pattern = /mul\((\d+),(\d+)\)|do\(\)|don't\(\)/
+    let pattern = Regex {
+        ChoiceOf {
+            Regex {
+                "mul("
+                TryCapture {
+                    OneOrMore(.digit)
+                } transform: {
+                    Int($0)
+                }
+                ","
+                TryCapture {
+                    OneOrMore(.digit)
+                } transform: {
+                    Int($0)
+                }
+                ")"
+            }
+            "do()"
+            "don't()"
+        }
+    }
     var isEnabled = true
     let result = lines.reduce(into: 0) { lineResult, line in
         let matches = line.matches(of: pattern)
-        
         lineResult += matches.reduce(into: 0) { partialResult, match in
             if match.output.0 == "don't()" {
                 isEnabled = false
             } else if match.output.0 == "do()" {
                 isEnabled = true
-            } else if isEnabled,
-                let firstString = match.output.1,
-                let secondString = match.output.2,
-                let firstInt = Int(firstString),
-                let secondInt = Int(secondString) {
-                    partialResult += firstInt * secondInt
+            } else if isEnabled, let firstInt = match.output.1, let secondInt = match.output.2 {
+                partialResult += firstInt * secondInt
             }
         }
     }
