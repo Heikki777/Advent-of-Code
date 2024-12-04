@@ -38,19 +38,17 @@ func readLines(fromFile file: String) -> [String] {
 let lines = readLines(fromFile: "input")
 
 func part1() {
+    let intCapture = TryCapture {
+        OneOrMore(.digit)
+    } transform: {
+        Int($0)
+    }
+    
     let pattern = Regex {
         "mul("
-        TryCapture {
-            OneOrMore(.digit)
-        } transform: {
-            Int($0)
-        }
+        intCapture
         ","
-        TryCapture {
-            OneOrMore(.digit)
-        } transform: {
-            Int($0)
-        }
+        intCapture
         ")"
     }
     let result = lines.reduce(into: 0) { lineResult, line in
@@ -63,21 +61,19 @@ func part1() {
 }
 
 func part2() {
+    let intCapture = TryCapture {
+        OneOrMore(.digit)
+    } transform: {
+        Int($0)
+    }
+    
     let pattern = Regex {
         ChoiceOf {
             Regex {
                 "mul("
-                TryCapture {
-                    OneOrMore(.digit)
-                } transform: {
-                    Int($0)
-                }
+                intCapture
                 ","
-                TryCapture {
-                    OneOrMore(.digit)
-                } transform: {
-                    Int($0)
-                }
+                intCapture
                 ")"
             }
             "do()"
