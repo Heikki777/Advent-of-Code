@@ -47,7 +47,7 @@ if let emptyLineIndex = lines.firstIndex(of: "") {
     
     var updates = lines[emptyLineIndex.advanced(by: 1) ..< lines.endIndex].map { $0.split(separator: ",").compactMap { Int($0) }}
     var isChangesMade = false
-    var updateRound = 1
+    var fixRound = 1
     var updateNeedsFixCheck: [Bool] = Array.init(repeating: true, count: updates.count)
     var middlePageNumbersInCorrectUpdates: [Int] = []
     var middlePageNumbersInCorrectedUpdates: [Int: Int] = [:]
@@ -65,13 +65,13 @@ if let emptyLineIndex = lines.firstIndex(of: "") {
                     updateNeedsFixCheck[j] = true
                 } else {
                     updateNeedsFixCheck[j] = false
-                    if updateRound == 1 {
+                    if fixRound == 1 {
                         middlePageNumbersInCorrectUpdates.append(update[update.count / 2])
                     }
                 }
             }
         }
-        updateRound += 1
+        fixRound += 1
     } while isChangesMade
     
     print("Part 1:", middlePageNumbersInCorrectUpdates.reduce(into: 0) { $0 = $0 + $1 })
